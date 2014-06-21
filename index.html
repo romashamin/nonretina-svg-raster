@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>SVG vs Raster Scaling/</title>
+<style type="text/css">
+  body { margin: 0; padding: 0; }
+  #wrapper { padding: 40px; }
+  .bgimg { display: inline-block; background-repeat: no-repeat; }
+  .plus-png {
+    width: 33px;
+    height: 33px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+    background-image: url('/plus@2x.png');
+    background-size: 33px 33px;
+  }
+  .star-png {
+    width: 37px;
+    height: 35px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+    margin-left: 7px;
+    background-image: url('/star@2x.png');
+    background-size: 37px 35px;
+  }
+  .plus-stroke {
+    width: 48px;
+    height: 48px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNDggNDgiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxjaXJjbGUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgY3g9IjI0LjUiIGN5PSIyNC41IiByPSIxNiIvPjxsaW5lIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiB4MT0iMTUiIHkxPSIyNC41IiB4Mj0iMzQiIHkyPSIyNC41Ii8+PGxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHgxPSIyNC41IiB5MT0iMTUiIHgyPSIyNC41IiB5Mj0iMzQiLz48L3N2Zz4=);
+  }
+  .plus-fill {
+    width: 48px;
+    height: 48px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNDggNDgiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGQ9Ik0yNC41LDQxQzE1LjQsNDEsOCwzMy42LDgsMjQuNUM4LDE1LjQsMTUuNCw4LDI0LjUsOEMzMy42LDgsNDEsMTUuNCw0MSwyNC41QzQxLDMzLjYsMzMuNiw0MSwyNC41LDQxeiBNMjQuNSw4LjkgQzE2LDguOSw4LjksMTYsOC45LDI0LjVjMCw4LjUsNy4xLDE1LjYsMTUuNiwxNS42YzguNSwwLDE1LjYtNy4xLDE1LjYtMTUuNkM0MC4xLDE2LDMzLDguOSwyNC41LDguOXoiLz48cmVjdCB4PSIxNSIgeT0iMjQiIHdpZHRoPSIxOSIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMjQiIHk9IjE1IiB3aWR0aD0iMSIgaGVpZ2h0PSIxOSIvPjwvc3ZnPg==);
+  }
+  .star-stroke {
+    width: 48px;
+    height: 48px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ4IDQ4IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA0OCA0OCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBvbHlnb24gZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50cz0iMjMuNSw2LjcgMjcuNywxOS40IDQxLjEsMTkuNCAzMC4yLDI3LjMgMzQuNCw0MC4xIDIzLjUsMzIuMiAxMi43LDQwLjEgMTYuOCwyNy4zIDYsMTkuNCAxOS40LDE5LjQgIi8+PC9zdmc+);
+  }
+  .star-fill {
+    width: 48px;
+    height: 48px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNDggNDgiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGQ9Ik0zNC40LDQwLjZjLTAuMSwwLTAuMiwwLTAuMy0wLjFsLTEwLjUtNy43TDEzLDQwLjVjLTAuMiwwLjEtMC40LDAuMS0wLjYsMGMtMC4yLTAuMS0wLjItMC40LTAuMi0wLjZsNC0xMi40TDUuNywxOS44IGMtMC4yLTAuMS0wLjItMC40LTAuMi0wLjZDNS42LDE5LjEsNS44LDE5LDYsMTloMTNsNC0xMi41YzAuMS0wLjQsMC44LTAuNCwxLDBMMjgsMTloMTNjMC4yLDAsMC40LDAuMSwwLjUsMC4zIGMwLjEsMC4yLDAsMC40LTAuMiwwLjZsLTEwLjUsNy43bDQsMTIuNGMwLjEsMC4yLDAsMC40LTAuMiwwLjZDMzQuNiw0MC41LDM0LjUsNDAuNiwzNC40LDQwLjZ6IE0yMy41LDMxLjdjMC4xLDAsMC4yLDAsMC4zLDAuMSBsOS42LDdsLTMuNy0xMS4zYy0wLjEtMC4yLDAtMC40LDAuMi0wLjZsOS42LTdIMjcuN2MtMC4yLDAtMC40LTAuMS0wLjUtMC4zTDIzLjUsOC4zbC0zLjcsMTEuM2MtMC4xLDAuMi0wLjMsMC4zLTAuNSwwLjNINy41bDkuNiw3IGMwLjIsMC4xLDAuMiwwLjQsMC4yLDAuNmwtMy43LDExLjNsOS42LTdDMjMuMywzMS43LDIzLjQsMzEuNywyMy41LDMxLjd6Ii8+PC9zdmc+);
+  }
+</style>
+</head>
+<body>
+  <div id="wrapper">
+    <span class="bgimg plus-png"></span>
+    <span class="bgimg plus-stroke"></span>
+    <span class="bgimg plus-fill"></span>
+    <span class="bgimg star-png"></span>
+    <span class="bgimg star-stroke"></span>
+    <span class="bgimg star-fill"></span>
+  </div>
+
+<script type="text/javascript">
+(function() {}).call(this);
+</script>
+</body>
+</html>
